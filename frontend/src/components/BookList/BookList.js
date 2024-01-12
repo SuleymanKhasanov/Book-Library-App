@@ -6,6 +6,7 @@ import "./BookList.css";
 function BookList() {
   const books = useSelector((state) => state.books);
   const dispatch = useDispatch();
+
   const handleDeleteBook = (id) => {
     dispatch(deleteBook(id));
   };
@@ -14,7 +15,7 @@ function BookList() {
     <div className="app-block book-list">
       <h2>Book list</h2>
       {books.length === 0 ? (
-        <p>No available books</p>
+        <p className="No-availble-books">No available books</p>
       ) : (
         <ul>
           {books.map((book, index) => (
