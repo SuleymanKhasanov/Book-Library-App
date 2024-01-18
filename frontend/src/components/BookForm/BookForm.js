@@ -55,7 +55,7 @@ function BookForm() {
         </div>
         <div className="title-autor">
           <label htmlFor="autor" className="title-autor__lable">
-            Autor Name:
+            Author Name:
           </label>
           <input type="text" id="autor" value={autor} onChange={(e) => setAutor(e.target.value)} />
         </div>
