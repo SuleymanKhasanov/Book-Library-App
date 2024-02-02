@@ -32,6 +32,22 @@ function BookList() {
     return matchesTitle && matchesAuthor && matchesFavorite;
   });
 
+  const hilightMatch = (text, filter) => {
+    if (!filter) return text;
+
+    const regex = new RegExp(`(${filter})`, "gi");
+    return text.split(regex).map((substring, index) => {
+      if (substring.toLowerCase() === filter.toLowerCase()) {
+        return (
+          <span key={index} className="highlight">
+            {substring}
+          </span>
+        );
+      }
+      return substring;
+    });
+  };
+
   return (
     <div className="app-block book-list">
       <h2>Book list</h2>
@@ -42,7 +58,8 @@ function BookList() {
           {filteredBooks.map((book, index) => (
             <li key={book.id} className="book-list">
               <div className="book-info">
-                {++index}. {book.title} by <strong>{book.autor}</strong>
+                {++index}. {hilightMatch(book.title, titleFilter)} by{" "}
+                <strong>{hilightMatch(book.autor, authorFilter)}</strong>
               </div>
               <div className="books-actions">
                 <span onClick={() => handleToggleFavorite(book.id)}>
