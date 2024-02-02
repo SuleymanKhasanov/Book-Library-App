@@ -1,13 +1,23 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { stateTitleFilter, resetFilters, setAuthorFilter } from "../../redux/slices/filterSlice";
-import { selectTitleFilter, selectAuthorFilter } from "../../redux/slices/filterSlice";
+import {
+  stateTitleFilter,
+  resetFilters,
+  setAuthorFilter,
+  setOnlyFavoriteFilter,
+} from "../../redux/slices/filterSlice";
+import {
+  selectTitleFilter,
+  selectAuthorFilter,
+  selectOnlyFavoriteFilter,
+} from "../../redux/slices/filterSlice";
 import "./Filter.css";
 
 const Filter = () => {
   const dispatch = useDispatch();
   const titleFilter = useSelector(selectTitleFilter);
   const authorFilter = useSelector(selectAuthorFilter);
+  const onlyFavoriteFilter = useSelector(selectOnlyFavoriteFilter);
 
   const hendleTitleFilterChange = (event) => {
     dispatch(stateTitleFilter(event.target.value));
@@ -15,6 +25,10 @@ const Filter = () => {
 
   const hendleAuthorFilterChange = (event) => {
     dispatch(setAuthorFilter(event.target.value));
+  };
+
+  const handleOnlyFavoriteFilterChange = () => {
+    dispatch(setOnlyFavoriteFilter());
   };
 
   const handleResetFilters = () => {
@@ -39,6 +53,16 @@ const Filter = () => {
             onChange={hendleAuthorFilterChange}
             value={authorFilter}
           />
+        </div>
+        <div className="filter-group">
+          <label>
+            <input
+              type="checkbox"
+              checked={onlyFavoriteFilter}
+              onChange={handleOnlyFavoriteFilterChange}
+            />
+            Only Favorite
+          </label>
         </div>
         <button type="button" onClick={handleResetFilters}>
           Reset Filters
